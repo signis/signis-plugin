@@ -1,17 +1,11 @@
 import {
 	Editor,
-	MarkdownView,
-	MarkdownFileInfo,
-	Modal,
-	Notice,
 	Plugin,
-    TAbstractFile,
-    TFile,
 } from 'obsidian';
 
 // Remember to rename these classes and interfaces!
 
-export default class MyPlugin extends Plugin {
+export default class SignisPlugin extends Plugin {
 
     private isInternalWrite = false;
 
@@ -35,7 +29,12 @@ export default class MyPlugin extends Plugin {
                 const metadata = this.app.metadataCache.getFileCache(file);
                 //console.log(metadata);
 
-                const tags = metadata?.frontmatter?.tags ?? [];
+                const rawTags: unknown = metadata?.frontmatter?.tags;
+                const tags = Array.isArray(rawTags)
+                    ? rawTags.filter((tag): tag is string => typeof tag === 'string')
+                    : typeof rawTags === 'string'
+                        ? [rawTags]
+                        : [];
                 //console.log(tags);
 
                 // when #randomtext in tags array
@@ -115,7 +114,7 @@ export default class MyPlugin extends Plugin {
             //console.log('New content:', newContent);
             
             // new + 1 second timestamp for mtime
-            const mtime = Date.now() + 1000;
+            // const mtime = Date.now() + 1000;
 
             editor.setValue(newContent);
 
