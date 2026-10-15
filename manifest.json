@@ -1,0 +1,11 @@
+{
+	"id": "signis-plugin",
+	"name": "Signis Plugin",
+	"version": "0.1.0",
+	"minAppVersion": "1.0.0",
+	"description": "Signis Plugin for Obsidian.",
+	"author": "Signis",
+	"authorUrl": "https://github.com/signis",
+	"fundingUrl": "https://github.com/signis",
+	"isDesktopOnly": false
+}
